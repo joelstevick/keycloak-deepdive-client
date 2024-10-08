@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
-import { KeycloakAuthGuard } from 'keycloak-angular';
+import { AppAuthGuard } from './auth/guards/app-auth.guard';
 
 const routes: Routes = [
   {
     path: 'home',
-    canActivate: [KeycloakAuthGuard],  // Protect the root route
+    canActivate: [AppAuthGuard],  // Protect the root route
     loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
   },
   {
@@ -15,7 +15,7 @@ const routes: Routes = [
   },
   {
     path: 'auth',
-    loadChildren: () => import('./auth/auth.module').then( m => m.AuthPageModule)
+    redirectTo: 'home',
   },
 ];
 
