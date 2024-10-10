@@ -1,31 +1,41 @@
 import { Injectable } from '@angular/core';
-import Keycloak from 'keycloak-js';  // Importing Keycloak directly
-import { environment } from 'src/environments/environment';
+import { KeycloakService as AngularKeycloakService } from 'keycloak-angular'; // Use Angular Keycloak Service
+import { decodeJwt } from 'jose';
 
 @Injectable({
   providedIn: 'root',
 })
 export class KeycloakService {
-  keycloak: Keycloak; // Using Keycloak instead of KeycloakInstance
-
-  constructor() {
-    this.keycloak = new Keycloak({
-      url: environment.keycloak.url,
-      realm: environment.keycloak.realm,
-      clientId: environment.keycloak.clientId,
-    });
-
-    this.init();
-  }
-
-  init() {
-    return this.keycloak.init({});
-  }
+  constructor(private keycloakService: AngularKeycloakService) {} // Inject Angular Keycloak Service
 
   logout() {
-    // Implementing the logout function using keycloak.logout()
-    this.keycloak.logout({
-      redirectUri: window.location.origin, // Adjust this URI based on where you want to redirect
-    });
+    this.keycloakService.logout(window.location.origin);
+  }
+
+  async requestScopes(scopes: string[]) {
+    try {
+      await this.keycloakService.login({
+        scope: scopes.join(' '),
+        prompt: 'consent',
+        redirectUri: 'http://localhost:8100',
+      });
+      console.log('Consent screen displayed, scopes requested:', scopes);
+    } catch (error) {
+      console.error('Error requesting scopes:', error);
+    }
+  }
+
+  async getScopes() {
+    const token = await this.keycloakService.getToken(); // Use getToken() method from Angular service
+    if (!token) {
+      console.error('Token is not available');
+      return 'token not available';
+    }
+
+    const decodedToken = decodeJwt(token);
+    const scopes = decodedToken['scope'] || '';
+
+    console.log('Decoded scopes:', scopes, typeof scopes);
+    return scopes as string;
   }
 }

@@ -2,9 +2,10 @@
   <div id="container">
     <!-- Left Navigation Pane -->
     <div class="nav-pane">
-      <ion-button expand="full">Request Read Access</ion-button>
-      <ion-button expand="full">Request Write Access</ion-button>
+      <ion-button expand="full" (click)="requestReadScope()">Request Read Access</ion-button>
+      <ion-button expand="full" (click)="requestWriteScope()">Request Write Access</ion-button>
       <ion-button expand="full" color="danger" (click)="logout()">Logout</ion-button>
+      <div>{{scopes}}</div>
     </div>
   </div>
 </ion-content>

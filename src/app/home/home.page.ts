@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { KeycloakService } from '../services/keycloak/keycloak.service';
 
 @Component({
@@ -6,11 +6,23 @@ import { KeycloakService } from '../services/keycloak/keycloak.service';
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
 })
-export class HomePage {
+export class HomePage implements OnInit {
+  scopes = '';
 
   constructor(private keycloakService: KeycloakService) {}
 
+  async ngOnInit() {
+    this.scopes = await this.keycloakService.getScopes();
+  }
+
   logout() {
-    this.keycloakService.logout()
+    this.keycloakService.logout();
+  }
+
+  requestReadScope() {
+    this.keycloakService.requestScopes(['read-access']);
+  }
+  requestWriteScope() {
+    this.keycloakService.requestScopes(['write-access']);
   }
 }
