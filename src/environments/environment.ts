@@ -5,14 +5,13 @@
 export const environment = {
   production: false,
   keycloak: {
-    url: 'http://localhost:8080', // Keycloak URL
-    realm: 'my-realm', // Your Keycloak realm
-    clientId: 'my-app', // Your client ID from Keycloak
+    url: 'http://localhost:8080/auth',
+    realm: 'my-realm',
+    clientId: 'my-app',
+    clientSecret: 'OdESmUxkGKaiSxeeP0TI9eH9HMK01Det',  // Add your client secret here
   },
-  api_url: 'http://localhost:8200',
-  keycloakSecret: 'OdESmUxkGKaiSxeeP0TI9eH9HMK01Det',
+  api_url: 'http://localhost:8200',  // Adjust this according to your API
 };
-
 /*
  * For easier debugging in development mode, you can import the following file
  * to ignore zone related error stack frames such as `zone.run`, `zoneDelegate.invokeTask`.
