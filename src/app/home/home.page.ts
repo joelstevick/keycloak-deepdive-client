@@ -25,4 +25,7 @@ export class HomePage implements OnInit {
   requestWriteScope() {
     this.keycloakService.requestScopes(['write-access']);
   }
+  requestAllScope() {
+    this.keycloakService.requestScopes(['read-access', 'write-access']);
+  }
 }
