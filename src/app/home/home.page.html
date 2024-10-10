@@ -5,9 +5,14 @@
       <ion-button expand="full" (click)="requestReadScope()">Request Read Access</ion-button>
       <ion-button expand="full" (click)="requestWriteScope()">Request Write Access</ion-button>
       <ion-button expand="full" (click)="requestAllScope()">Request All Access</ion-button>
-
       <ion-button expand="full" color="danger" (click)="logout()">Logout</ion-button>
       <div>{{scopes}}</div>
+
+      <hr>
+
+      <!-- New Section for API Endpoints -->
+      <ion-button expand="full" (click)="tryReadEndpoint()">Try Read Endpoint</ion-button>
+      <ion-button expand="full" (click)="tryWriteEndpoint()">Try Write Endpoint</ion-button>
     </div>
   </div>
 </ion-content>

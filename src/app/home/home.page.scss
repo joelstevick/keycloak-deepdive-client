@@ -48,3 +48,11 @@ ion-img {
 ion-content {
   --background: transparent;  // Ensure background is transparent
 }
+
+hr {
+  border: none; // Remove the default border
+  height: 2px; // Set the height of the line
+  background: linear-gradient(to right, #4caf50, #81c784); // Green gradient
+  margin: 10px 0; // Space around the hr
+  border-radius: 5px; // Rounded corners
+}
