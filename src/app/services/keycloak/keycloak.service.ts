@@ -35,7 +35,6 @@ export class KeycloakService {
     const decodedToken = decodeJwt(token);
     const scopes = decodedToken['scope'] || '';
 
-    console.log('Decoded scopes:', scopes, typeof scopes);
     return scopes as string;
   }
 }
