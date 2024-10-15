@@ -14,6 +14,7 @@ function formatOutput(str: string) {
 })
 export class HomePage implements OnInit {
   scopes = '';
+  hasError = false;
 
   responseData = '';
 
@@ -44,6 +45,8 @@ export class HomePage implements OnInit {
 
   async tryReadEndpoint() {
     try {
+      this.hasError = false;
+
       const token = await this.angularKeycloakService.getToken(); // Get token from Keycloak Angular Service
       const response = await axios.get(`${environment.api_url}/read`, {
         headers: {
@@ -54,11 +57,14 @@ export class HomePage implements OnInit {
      this.responseData = formatOutput(response.data);
     } catch (error: any) {
       this.responseData = error;
+      this.hasError = true
     }
   }
 
   async tryWriteEndpoint() {
     try {
+      this.hasError = false;
+
       const token = await this.angularKeycloakService.getToken(); // Get token from Keycloak Angular Service
       const response = await axios.post(`${environment.api_url}/write`, {}, {
         headers: {
@@ -67,8 +73,9 @@ export class HomePage implements OnInit {
       });
 
       this.responseData = formatOutput(response.data);
-    } catch (error) {
-      console.error('Error calling write endpoint:', error);
+    } catch (error: any) {
+      this.responseData = error;
+      this.hasError = true;
     }
   }
 }

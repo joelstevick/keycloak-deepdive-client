@@ -1,21 +1,29 @@
 <ion-content [fullscreen]="true">
   <div id="container">
-    <!-- Left Navigation Pane -->
-    <div class="nav-pane">
-      <ion-button expand="full" (click)="requestReadScope()">Request Read Access</ion-button>
-      <ion-button expand="full" (click)="requestWriteScope()">Request Write Access</ion-button>
-      <ion-button expand="full" (click)="requestAllScope()">Request All Access</ion-button>
-      <ion-button expand="full" color="danger" (click)="logout()">Logout</ion-button>
-      <div class="scopes">scopes: {{scopes}}</div>
-
-      <hr>
-
-      <!-- New Section for API Endpoints -->
-      <ion-button expand="full" (click)="tryReadEndpoint()">Try Read Endpoint</ion-button>
-      <ion-button expand="full" (click)="tryWriteEndpoint()">Try Write Endpoint</ion-button>
+    <div class="header">
+      <h1>EVIR API Access</h1>
     </div>
 
-    <div class="message">{{responseData}}</div>
+    <div class="button-grid">
+      <div class="section-title">Access Controls</div>
+      <ion-button expand="block" shape="round" (click)="requestReadScope()">Request Read Access</ion-button>
+      <ion-button expand="block" shape="round" (click)="requestWriteScope()">Request Write Access</ion-button>
+      <ion-button expand="block" shape="round" (click)="requestAllScope()">Request All Access</ion-button>
 
+      <ion-button expand="block" shape="round" color="danger" (click)="logout()">Logout</ion-button>
+
+      <div class="scope-display">Active Scopes: {{scopes}}</div>
+
+      <div class="divider"></div>
+
+      <div class="section-title">Test API Endpoints</div>
+      <ion-button expand="block" shape="round" (click)="tryReadEndpoint()">Try Read Endpoint</ion-button>
+      <ion-button expand="block" shape="round" (click)="tryWriteEndpoint()">Try Write Endpoint</ion-button>
+    </div>
+
+    <div class="response-section" [ngClass]="{ 'error': hasError }">
+      <div class="section-title">{{ hasError ? 'Error' : 'Response' }}</div>
+      <div class="response-message">{{responseData}}</div>
+    </div>
   </div>
 </ion-content>
