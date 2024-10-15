@@ -4,6 +4,9 @@ import { KeycloakService } from '../services/keycloak/keycloak.service'; // Your
 import axios from 'axios'; // Import Axios
 import { environment } from 'src/environments/environment'; // Import environment
 
+function formatOutput(str: string) {
+  return JSON.stringify(str, null, 2)
+}
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
@@ -11,6 +14,8 @@ import { environment } from 'src/environments/environment'; // Import environmen
 })
 export class HomePage implements OnInit {
   scopes = '';
+
+  responseData = '';
 
   constructor(
     private keycloakService: KeycloakService, // Your existing Keycloak service
@@ -46,9 +51,9 @@ export class HomePage implements OnInit {
         },
       });
 
-      console.log('Read endpoint response:', response.data);
-    } catch (error) {
-      console.error('Error calling read endpoint:', error);
+     this.responseData = formatOutput(response.data);
+    } catch (error: any) {
+      this.responseData = error;
     }
   }
 
@@ -61,7 +66,7 @@ export class HomePage implements OnInit {
         },
       });
 
-      console.log('Write endpoint response:', response.data);
+      this.responseData = formatOutput(response.data);
     } catch (error) {
       console.error('Error calling write endpoint:', error);
     }
