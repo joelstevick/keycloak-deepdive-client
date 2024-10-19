@@ -15,7 +15,7 @@ function initializeKeycloak(keycloak: KeycloakService) {
       initOptions: {
         onLoad: 'login-required',
         checkLoginIframe: false,
-        redirectUri: 'http://localhost:4200/auth', // Adjust the redirect URI if necessary
+        redirectUri: 'http://localhost:8100/auth', // Adjust the redirect URI if necessary
       },
       bearerExcludedUrls: [],
     });
