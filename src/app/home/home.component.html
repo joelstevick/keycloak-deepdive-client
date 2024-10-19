@@ -1,1 +1,27 @@
-<p>home works!</p>
+<div id="container" class="flex flex-col h-screen p-4">
+  <div class="header">
+    <h1 class="text-2xl font-bold">Oath Flow Test</h1>
+  </div>
+
+  <div class="button-grid flex flex-col mt-4">
+    <div class="section-title text-lg font-semibold">Access Controls</div>
+    <button class="bg-blue-500 text-white rounded-full py-2 mt-2 hover:bg-blue-600" (click)="requestReadScope()">Request Read Access</button>
+    <button class="bg-blue-500 text-white rounded-full py-2 mt-2 hover:bg-blue-600" (click)="requestWriteScope()">Request Write Access</button>
+    <button class="bg-blue-500 text-white rounded-full py-2 mt-2 hover:bg-blue-600" (click)="requestAllScope()">Request All Access</button>
+
+    <button class="bg-red-500 text-white rounded-full py-2 mt-2 hover:bg-red-600" (click)="logout()">Logout</button>
+
+    <div class="scope-display mt-4">Active Scopes: {{scopes}}</div>
+
+    <div class="divider my-4 border-t border-gray-300"></div>
+
+    <div class="section-title text-lg font-semibold">Test API Endpoints</div>
+    <button class="bg-blue-500 text-white rounded-full py-2 mt-2 hover:bg-blue-600" (click)="tryReadEndpoint()">Try Read Endpoint</button>
+    <button class="bg-blue-500 text-white rounded-full py-2 mt-2 hover:bg-blue-600" (click)="tryWriteEndpoint()">Try Write Endpoint</button>
+  </div>
+
+  <div class="response-section mt-4" [ngClass]="{ 'error': hasError }">
+    <div class="section-title text-lg font-semibold">{{ hasError ? 'Error' : 'Response' }}</div>
+    <div class="response-message">{{responseData}}</div>
+  </div>
+</div>
